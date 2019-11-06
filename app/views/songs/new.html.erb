@@ -16,11 +16,11 @@
   
   <br />
 
-  <%= text_field_tag 'note[content]'%>
+  <% 2.times do | i |%>
 
-  <%= text_field_tag 'note[content]' %>
+    <%= text_field_tag "song_notes_attributes_#{i}_content"%>
 
-
+  <% end %>
 
   <br />
 

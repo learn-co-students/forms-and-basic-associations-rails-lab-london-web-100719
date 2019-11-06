@@ -16,8 +16,8 @@ class SongsController < ApplicationController
   def create
     @song = Song.new(song_params)
 
-    params[:note].count do |note|
-      @song.notes << Note.new(note_params)
+    2.times do | i |
+      @song.notes << Note.new(content: params["song_notes_attributes_#{i}_content"])
     end
 
     if @song.save
@@ -54,10 +54,6 @@ class SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit(:title, :artist_name, :genre_id)
-  end
-
-  def note_params
-    params.require(:note).permit(:content)
   end
 end
 
