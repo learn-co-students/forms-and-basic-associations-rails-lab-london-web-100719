@@ -9,12 +9,16 @@ class SongsController < ApplicationController
 
   def new
     @song = Song.new
+    @song.notes = []
+    3.times{@song.notes.new}
+    @genres = Genre.all
   end
 
   def create
     @song = Song.new(song_params)
-
+    # @song.notes.delete_if {|e| e == "" }
     if @song.save
+
       redirect_to @song
     else
       render :new
@@ -47,7 +51,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title)
+    params.require(:song).permit(:title, :artist_name, :genre_id, notes_attributes: [:content])#, song[:notes])
   end
 end
 
